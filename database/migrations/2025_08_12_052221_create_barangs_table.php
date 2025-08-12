@@ -13,8 +13,9 @@ return new class extends Migration
     {
         Schema::create('barangs', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
             $table->string('nama');
+            $table->timestamps();
+            
         });
     }
 
