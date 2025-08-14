@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nama_barang');
             $table->integer('qty');
-            $table->double('harga');
+            $table->decimal('harga', 10, 2);
             $table->timestamps();
         });
     }
