@@ -11,9 +11,24 @@ class Barang extends Model
     use HasFactory;
 
     protected $fillable = [
-        'nama_barang',
-        'qty',
-        'harga',
+    'nama_barang',
+    'kode_inventaris',
+    'kategori_id',
+    'ruangan_id',   
+    'tahun_pengadaan',
+    'sumber_dana',
+    'kondisi',
     ];
+
+    public function kategori()
+    {
+        return $this->belongsTo(Kategori::class);
+    }
+
+    // Relasi: Barang belongsTo Ruangan
+    public function ruangan()
+    {
+        return $this->belongsTo(Ruangan::class);
+    }
 }
 ?>

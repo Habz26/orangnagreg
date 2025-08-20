@@ -17,9 +17,14 @@ class BarangFactory extends Factory
     public function definition(): array
     {
         return [
-            'nama_barang' => fake()->word(),
-            'qty' => fake()->numberBetween(1, 100),
-            'harga' => fake()->randomFloat(2, 1000, 100000),
-        ];
+    'nama_barang' => fake()->word(),
+    'kode_inventaris' => fake()->unique()->bothify('INV-###'),
+    'kategori_id' => \App\Models\Kategori::factory(), // auto bikin kategori dan ambil id
+    'ruangan_id' => \App\Models\Ruangan::factory(),   // auto bikin ruangan dan ambil id
+    'tahun_pengadaan' => fake()->year(),
+    'sumber_dana' => fake()->randomElement(['APBD', 'Donasi', 'BOS', 'Rakyat']),
+    'kondisi' => fake()->randomElement(['Baik', 'Rusak Ringan', 'Rusak Berat']),
+    ];
+
     }
 }
