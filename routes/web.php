@@ -4,22 +4,17 @@ use App\Models\Kategori;
 use App\Models\Bangunan;
 use App\Models\Tanah;
 use App\Models\Ruangan;
+use App\Http\Controllers\BarangController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/test', function () {
-    return view('index', ['name' => 'Dede Sahrur Mubarok']);
-});
 
-Route::get('/barang', function () {
-    return view('barang', [
-        'title' => 'Barang',
-        'items' => Barang::all(),
-    ]);
-});
+Route::get('/barang', [ BarangController::class, 'index'])->name('barang.index');
+Route::get('/barang/create', [ BarangController::class, 'create'])->name('barang.create');
+Route::post('/barang', [ BarangController::class, 'store'])->name('barang.store');
 
 Route::get('/ruangan', function () {
     return view('ruangan', [
