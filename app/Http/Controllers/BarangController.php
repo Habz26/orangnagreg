@@ -9,7 +9,7 @@ class BarangController extends Controller
 {
     public function index()
     {
-        return view('barang', [
+        return view('barang.index', [
         'title' => 'Barang',
         'items' => Barang::all(),
     ]);
@@ -21,7 +21,9 @@ class BarangController extends Controller
     }
     function store(Request $request)
     {
-        dd($request->all());
+        // dd($request->all());
+        $barang = $request->all();
+        Barang::create($barang);
         // $barang = new Barang();
         // $barang->nama_barang = $request->input('nama_barang');
         // $barang->kode_inventaris = $request->input('kode_inventaris');

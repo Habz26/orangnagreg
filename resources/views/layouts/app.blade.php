@@ -30,19 +30,7 @@
     text-decoration: none;
     border-bottom: 2px solid rgb(226, 13, 226);
   }
-  table {
-  width: 100%;
-  border-collapse: collapse; /* biar border tidak double */
-}
 
-table, th, td {
-  border: 1px  dashed purple; /* kasih border di semua sisi */
-}
-
-th, td {
-  padding: 8px;
-  text-align: center;
-}
 
     </style>
 </head>

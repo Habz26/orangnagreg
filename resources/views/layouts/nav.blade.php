@@ -14,6 +14,7 @@
       </div>
       <div class="ms-auto">
         <button class="btn btn-outline-info me-2" onclick="location.href='02index.php';">Lihat Data</button>
+        <a class="btn btn-outline-info me-2" href='{{route('kategori.create')}}';">Tambah Data</a>
         <button class="btn btn-outline-danger" onclick="location.href='logout.php';">Logout</button>
       </div>
     </div>
