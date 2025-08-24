@@ -1,6 +1,7 @@
 @extends('layouts.app')
-@section('content_tanah')
+@section('content')
     <div style="margin: 20px;">
+        <a class="btn btn-outline-info m-2" href='{{route('tanah.create')}}';">Tambah Data</a>
         <table border="" cellpadding="10" cellspacing="0" style="width: 100%; text-align: center; border-style: ridge;">
             <thead>
                 <tr>

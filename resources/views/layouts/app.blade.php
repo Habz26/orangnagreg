@@ -39,10 +39,6 @@
     
     <div class="container">
         @yield('content')
-        @yield('content_tanah')
-        @yield('content_ruangan')
-        @yield('content_bangunan')
-        @yield('content_kategori')
     </div>
 </body>
 </html>

@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('content_kategori')
+@section('content')
     {{-- <select name="" id="">
         <option value="">Filter Kategori</option>
         @foreach ($tanah as $item)
@@ -7,6 +7,8 @@
         @endforeach
     </select> --}}
     <div class="m-4">
+        
+        <a class="btn btn-outline-info m-2" href='{{route('kategori.create')}}';">Tambah Data</a>
         <table class="table table-striped">
             <thead>
                 <tr>

@@ -1,7 +1,8 @@
 @extends('layouts.app')
 @section('content')
     <div style="margin: 20px;">
-        <table border="1" cellpadding="10" cellspacing="0" style="width: 100%; text-align: center;">
+        <a class="btn btn-outline-info m-2" href='{{route('barang.create')}}';">Tambah Data</a>
+        <table class="table table-striped">
             <thead>
                 <tr>
                     <th>No</th>

@@ -5,6 +5,7 @@ use App\Models\Bangunan;
 use App\Models\Tanah;
 use App\Models\Ruangan;
 use App\Http\Controllers\BarangController;
+use App\Http\Controllers\UserCotroller;
 use App\Http\Controllers\KategoriController;
 use Illuminate\Support\Facades\Route;
 
@@ -19,6 +20,8 @@ Route::post('/barang', [ BarangController::class, 'store'])->name('barang.store'
 
 
 Route::resource('kategori', KategoriController::class)->names('kategori');
+
+Route::resource('user', UserCotroller::class)->names('user');
 
 // Route::get('/ruangan', [ RuanganController::class, 'index'])->name('ruangan.index');
 // Route::get('/ruangan/create', [ RuanganController::class, 'create'])->name('ruangan.create');
@@ -44,3 +47,19 @@ Route::get('/bangunan', function () {
         'items' => Bangunan::all(),
     ]);
 });
+
+Route::middleware('guest')->group(function () {
+    Route::get('/login', function () {
+        return view('auth.login');
+    })->name('login');
+    Route::post('/login', [App\Http\Controllers\AuthController::class, 'login'])->name('login.post');
+});
+
+Route::middleware('auth')->group(function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+    Route::resource('user', UserCotroller::class)->names('user');
+});
+
+Route::post('/logout', [App\Http\Controllers\AuthController::class, 'logout'])->name('logout');

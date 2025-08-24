@@ -1,6 +1,7 @@
 @extends('layouts.app')
-@section('content_ruangan')
+@section('content')
     <div style="margin: 20px;">
+        <a class="btn btn-outline-info m-2" href='{{route('ruangan.create')}}';">Tambah Data</a>
         <table border="1" cellpadding="10" cellspacing="0" style="width: 100%; text-align: center;">
             <thead>
                 <tr>
