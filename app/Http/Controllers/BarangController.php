@@ -17,19 +17,32 @@ class BarangController extends Controller
     }
     public function create()
     {
-        return view('input');
+        return view('barang.input');
     }
-    function store(Request $request)
+    public function store(Request $request)
     {
         // dd($request->all());
         $barang = $request->all();
         Barang::create($barang);
-        // $barang = new Barang();
-        // $barang->nama_barang = $request->input('nama_barang');
-        // $barang->kode_inventaris = $request->input('kode_inventaris');
-        // $barang->kategori_id = $request->input('kategori_id');
-        // $barang->save();
-
         return redirect()->route('barang.index')->with('success', 'Barang berhasil ditambahkan!');
+    }
+    public function edit(string $id)
+    {
+        return view('barang.edit', [
+            'item' => Barang::findOrFail($id)
+        ]);
+    }
+    public function update(Request $request, string $id)
+    {
+        $barang = $request->all();
+        $item = Barang::findOrFail($id);
+        $item->update($barang);
+        return redirect()->route('barang.index')->with('success', 'Barang berhasil diupdate!');
+    }
+    public function destroy(string $id)
+    {
+        $item = Barang::findOrFail($id);
+        $item->delete();
+        return redirect()->route('barang.index')->with('success', 'Barang berhasil dihapus!');
     }
 }

@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark ">
+<nav class="navbar bg-primary navbar-expand-lg navbar-dark ">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">Sistem Informasi Manajemen Aset Sekolah</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
@@ -18,11 +18,11 @@
                     <a class="nav-link" href="../ruangan">Ruangan</a>
                     <a class="nav-link" href="../kategori">Kategori</a>
                 </div>
-                <div class="ms-auto">
-                    <button class="btn btn-outline-info me-2" onclick="location.href='02index.php';">Lihat Data</button>
+                <div class="ms-auto d-flex flex-row">
+                    {{-- <button class="btn btn-outline-info me-2" onclick="location.href='02index.php';">Lihat Data</button> --}}
                     <form action="{{ route('logout') }}" method="post">
                         @csrf
-                        <button class="btn btn-outline-danger me-2" type="submit">Logout</button>
+                        <button class="btn btn-danger me-2" type="submit">Logout</button>
                     </form>
                 </div>
             @endauth
