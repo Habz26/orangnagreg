@@ -12,7 +12,7 @@
 
 <body>
     @include('layouts.nav')
-        <div class="container">
+        <div class="container mt-4">
         @yield('content')
     </div>
 </body>
