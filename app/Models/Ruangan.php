@@ -11,7 +11,8 @@ class Ruangan extends Model
 
     protected $table = 'ruangan';
 
-    protected $fillable = ['nama_ruangan', 
+    protected $fillable = [
+    'nama_ruangan', 
     'kode_ruangan', 
     'bangunan_id'
 ];

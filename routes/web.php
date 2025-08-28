@@ -8,7 +8,9 @@ use App\Http\Controllers\BarangController;
 use App\Http\Controllers\UserCotroller;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\TanahController;
-use App\Http\Controllers\RuanganController; // --- IGNORE ---    
+use App\Http\Controllers\RuanganController;
+use App\Http\Controllers\BangunanController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -16,40 +18,15 @@ Route::get('/', function () {
 });
 
 
-Route::get('/barang', [ BarangController::class, 'index'])->name('barang.index');
-Route::get('/barang/create', [ BarangController::class, 'create'])->name('barang.create');
-Route::post('/barang', [ BarangController::class, 'store'])->name('barang.store');
-
-
-Route::resource('kategori', KategoriController::class)->names('kategori');
-
-Route::resource('user', UserCotroller::class)->names('user');
-Route::resource('/tanah', TanahController::class)->names('tanah');
-
-// Route::get('/ruangan', [ RuanganController::class, 'index'])->name('ruangan.index');
-// Route::get('/ruangan/create', [ RuanganController::class, 'create'])->name('ruangan.create');
-// Route::post('/ruangan', [ RuanganController::class, 'store'])->name('ruangan.store');
-
-Route::get('/ruangan', function () {
-    return view('ruangan.index', [
-        'title' => 'Ruangan',
-        'items' => Ruangan::all(),
-    ]);
-});
-
-
-Route::get('/bangunan', function () {
-    return view('bangunan.index', [
-        'title' => 'Bangunan',
-        'items' => Bangunan::all(),
-    ]);
-});
-
 Route::middleware('guest')->group(function () {
     Route::get('/login', function () {
         return view('auth.login');
     })->name('login');
     Route::post('/login', [App\Http\Controllers\AuthController::class, 'login'])->name('login.post');
+    Route::get('/register', function () {
+        return view('auth.register');
+    })->name('register');
+    Route::post('/register', [App\Http\Controllers\AuthController::class, 'register'])->name('register.post');
 });
 
 Route::middleware('auth')->group(function () {
@@ -57,6 +34,22 @@ Route::middleware('auth')->group(function () {
         return view('dashboard');
     })->name('dashboard');
     Route::resource('user', UserCotroller::class)->names('user');
+    
+    // Route yang bisa diakses admin dan user
+    Route::middleware('role:admin,user')->group(function () {
+        Route::resource('/tanah', TanahController::class)->names('tanah');
+        Route::resource('/bangunan', BangunanController::class)->names('bangunan');
+        Route::resource('/ruangan', RuanganController::class)->names('ruangan');
+        Route::resource('/kategori', KategoriController::class)->names('kategori');
+        Route::resource('/barang', BarangController::class)->names('barang');
+    });
+    
+    // Route khusus untuk admin (manajemen pengguna)
+    Route::middleware('role:admin')->group(function () {
+        // Pastikan Anda sudah membuat UserController, misalnya dengan:
+        // php artisan make:controller UserController --resource
+        Route::resource('/user', UserCotroller::class)->names('user');
+    });
 });
 
 Route::post('/logout', [App\Http\Controllers\AuthController::class, 'logout'])->name('logout');
