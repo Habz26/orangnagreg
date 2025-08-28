@@ -20,13 +20,14 @@
                     <thead class="table-light">
                         <tr>
                             <th scope="col" class="text-center">No</th>
-                            <th scope="col">Nama Barang</th>
-                            <th scope="col">Kode Inventaris</th>
-                            <th scope="col">Kategori ID</th>
-                            <th scope="col">Ruangan ID</th>
-                            <th scope="col">Tahun Pengadaan</th>
-                            <th scope="col">Sumber Dana</th>
-                            <th scope="col">Kondisi</th>
+                            <th scope="col" class="text-center">Nama Barang</th>
+                            <th scope="col" class="text-center">Kode Inventaris</th>
+                            <th scope="col" class="text-center">Kategori ID</th>
+                            <th scope="col" class="text-center">Ruangan ID</th>
+                            <th scope="col" class="text-center">Tahun Pengadaan</th>
+                            <th scope="col" class="text-center">Sumber Dana</th>
+                            <th scope="col" class="text-center">Kondisi</th>
+                            <th scope="col" class="text-center">Opsi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -40,6 +41,19 @@
                                 <td>{{ $item->tahun_pengadaan }}</td>
                                 <td>{{ $item->sumber_dana }}</td>
                                 <td>{{ $item->kondisi }}</td>
+                                <td>
+                                    <div class="d-flex justify-content-center gap-2">
+                                        <a class="btn btn-success btn-sm"
+                                            href="{{ route('barang.edit', $item->id) }}">Edit</a>
+                                        <form action="{{ route('barang.destroy', $item->id) }}" method="post"
+                                            onsubmit="return confirm('Yakin ingin menghapus data ini?');">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button class="btn btn-danger btn-sm" type="submit">Hapus</button>
+                                        </form>
+                                    </div>
+                                </td>
+
                             </tr>
                         @endforeach
                     </tbody>

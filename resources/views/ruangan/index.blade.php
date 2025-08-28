@@ -24,6 +24,7 @@
                             <th scope="col">Nama Ruangan</th>
                             <th scope="col">Kode Ruangan</th>
                             <th scope="col">Bangunan ID</th>
+                            <th scope="col" class="text-center">Opsi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -33,6 +34,16 @@
                                 <td>{{ $item->nama_ruangan }}</td>
                                 <td>{{ $item->kode_ruangan }}</td>
                                 <td>{{ $item->bangunan_id }}</td>
+                                <td class="text-center">
+                                    <div class="d-flex justify-content-center gap-2">
+                                        <a class="btn btn-success btn-sm" href="{{ route('ruangan.edit', $item->id) }}">Edit</a>
+                                        <form action="{{ route('ruangan.destroy', $item->id) }}" method="post" onsubmit="return confirm('Yakin ingin menghapus data ini?');">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button class="btn btn-danger btn-sm" type="submit">Hapus</button>
+                                        </form>
+                                    </div>
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>
