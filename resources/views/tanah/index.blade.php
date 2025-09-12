@@ -25,6 +25,7 @@
                             <th scope="col" class="text-center">Kode Tanah</th>
                             <th scope="col" class="text-center">Luas</th>
                             <th scope="col" class="text-center">No Sertifikat</th>
+                            <th scope="col" class="text-center">Opsi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -35,6 +36,17 @@
                                 <td scope="col" class="text-center">{{ $item->kode_tanah }}</td>
                                 <td scope="col" class="text-center">{{ $item->luas }}</td>
                                 <td scope="col" class="text-center">{{ $item->no_sertifikat }}</td>
+                                <td class="text-center">
+                                    <div class="d-flex justify-content-center gap-2">
+                                        <a class="btn btn-success btn-sm" href="{{ route('tanah.edit', $item->id) }}">Edit</a>
+                                        <form action="{{ route('tanah.destroy', $item->id) }}" method="post"
+                                            onsubmit="return confirm('Yakin ingin menghapus data ini?');">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button class="btn btn-danger btn-sm" type="submit">Hapus</button>
+                                        </form>
+                                    </div>
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>

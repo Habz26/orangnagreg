@@ -53,7 +53,11 @@
                             </div>
                             <div class="d-flex justify-content-end">
                                 <button class="btn btn-success me-2" type="submit">Simpan</button>
-                                <button class="btn btn-secondary" type="reset">Batal</button>
+                                <button type="button" class="btn btn-danger"
+                                    onclick="window.location='{{ route('barang.index') }}'">
+                                    BATAL
+                                </button>
+
                             </div>
                         </form>
                     </div>

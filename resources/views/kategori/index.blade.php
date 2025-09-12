@@ -22,7 +22,7 @@
                         <tr>
                             <th scope="col" class="text-center">No</th>
                             <th scope="col" class="text-center">Nama Kategori</th>
-                            <th scope="col" class="text-center">Aksi</th>
+                            <th scope="col" class="text-center">Opsi</th>
                         </tr>
                     </thead>
                     <tbody>

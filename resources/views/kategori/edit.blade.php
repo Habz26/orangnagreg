@@ -1,24 +1,31 @@
 @extends('layouts.app')
 @section('content')
-    <div style="margin: 25%;">
-        <form action="{{route('kategori.update',$item->id)}}" method="post">
-            @csrf
-            @method('PUT')
-        <table class="table table-striped">
-            <tr>
-                <td scope="row" class="text-center">Nama Kategori</td>
-                <td scope="row" class="text-center">:</td>
-                <td scope="row" class="text-center"><input type="text" name="nama_kategori" value="{{ old('nama_kategori',$item->nama_kategori) }}"></td>
-                <td scope="row" class="text-center"><input type="hidden" name="id" id=""></td>
-            </tr>
-            
-            <tr>
-                <td></td>
-                <td scope="row" class="text-center"><input type="submit" value="SIMPAN" id="" class="btn btn-outline-success me-2"></td>
-                <td scope="row" class="text-center"><button type="reset" class="btn btn-outline-danger me-2">BATAL</button></td>
-            </tr>
-        </table>
-    </form>
-    </div>
+    <div class="d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+        <div class="card" style="max-width: 500px; width: 100%;">
+            <div class="card-header text-center">
+                Edit Kategori
+            </div>
+            <div class="card-body">
+                <form action="{{ route('kategori.update', $item->id) }}" method="post">
+                    @csrf
+                    @method('PUT')
 
-    @endsection
+                    <div class="mb-3">
+                        <label for="nama_kategori" class="form-label">Nama Kategori</label>
+                        <input type="text" class="form-control" name="nama_kategori" id="nama_kategori"
+                            value="{{ old('nama_kategori', $item->nama_kategori) }}" required>
+                    </div>
+
+                    <div class="text-end">
+                        <button type="submit" class="btn btn-success">SIMPAN</button>
+                        <button type="button" class="btn btn-danger"
+                            onclick="window.location='{{ route('kategori.index') }}'">
+                            BATAL
+                        </button>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+@endsection

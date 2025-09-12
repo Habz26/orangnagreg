@@ -1,4 +1,38 @@
 @import 'bootstrap';
+/* resources/css/app.css */
+@import "admin-lte/dist/css/adminlte.min.css";
+
+/* ========== Font & Reset ========== */
+@import url('https://fonts.bunny.net/css?family=instrument-sans:400,500,600');
+
+/* ========== FontAwesome (Icons) ========== */
+@import "admin-lte/plugins/fontawesome-free/css/all.min.css";
+
+/* ========== AdminLTE Core ========== */
+@import "admin-lte/dist/css/adminlte.min.css";
+
+/* ========== Optional Plugins ========== */
+/* DataTables (jika pakai tabel interaktif) */
+@import "admin-lte/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css";
+@import "admin-lte/plugins/datatables-responsive/css/responsive.bootstrap4.min.css";
+@import "admin-lte/plugins/datatables-buttons/css/buttons.bootstrap4.min.css";
+
+/* Tempusdominus / Datepicker */
+@import "admin-lte/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css";
+
+/* Select2 (dropdown enhanced) */
+@import "admin-lte/plugins/select2/css/select2.min.css";
+@import "admin-lte/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css";
+
+/* SweetAlert2 */
+@import "admin-lte/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css";
+
+/* Ekstra kustom CSS kamu */
+@import "resources/css/custom.css"; /* opsional, buat override style */
+
+
+
+/* CSS lain kamu bisa di bawah */
 
 /* @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php'; */
 /* @source '../../storage/framework/views/*.php'; */

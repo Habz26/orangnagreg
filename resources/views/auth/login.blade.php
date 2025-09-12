@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 
-<div class="d-flex justify-content-center align-items-center min-vh-100">
+<div class="d-flex justify-content-center align-items-center" style="height: 80vh;">
     <div class="container" style="max-width: 500px;">
         <h2>Login</h2>
         <form method="POST" action="{{ route('login') }}">

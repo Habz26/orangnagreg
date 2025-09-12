@@ -1,43 +1,52 @@
 @extends('layouts.app')
 @section('content')
-    <div style="margin: 25%;">
-        <form action="{{route('barang.update',$item->id)}}" method="post">
-            @csrf
-            @method('PUT')
-        <table class="table table-striped">
-            <tr>
-                <td scope="row" class="text-center">Nama Barang</td>
-                <td scope="row" class="text-center"></td>
-                <td scope="row" class="text-center"><input type="text" name="nama_barang" id="" value="{{ old('nama_barang',$item->nama_barang) }}"></td>
-                <td scope="row" class="text-center"><input type="hidden" name="id" id=""></td>
-            </tr>
-            <tr>
-                <td scope="row" class="text-center">Kode Inventaris</td>
-                <td scope="row" class="text-center"></td>
-                <td scope="row" class="text-center"><input type="text" name="kode_inventaris" id="" value="{{ old('kode_inventaris',$item->kode_inventaris) }}"></td>
-            </tr>
-            <tr>
-                <td scope="row" class="text-center">Kategori ID</td>
-                <td scope="row" class="text-center"></td>
-                <td scope="row" class="text-center"><input type="text" name="kategori_id" id="" value="{{ old('kategori_id',$item->kategori_id) }}"></td>
-            </tr>
-            <tr>
-                <td scope="row" class="text-center">Ruangan ID</td>
-                <td scope="row" class="text-center"></td>
-                <td scope="row" class="text-center"><input type="text" name="ruangan_id" id="" value="{{ old('ruangan_id',$item->ruangan_id) }}"></td>
-            </tr>
-            <tr>
-                <td scope="row" class="text-center">Tahun Pengadaan</td>
-                <td scope="row" class="text-center"></td>
-                <td scope="row" class="text-center"><input type="text" name="tahun_pengadaan" id="" value="{{ old('tahun_pengadaan',$item->tahun_pengadaan) }}"></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td scope="row" class="text-center"><input type="submit" value="SIMPAN" id=""></td>
-                <td scope="row" class="text-center"><button type="reset" style="border-radius: 5px;">BATAL</button></td>
-            </tr>
-        </table>
-    </form>
-    </div>
+    <div class="d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+        <div class="card" style="max-width: 600px; width: 100%;">
+            <div class="card-header text-center">
+                Edit Barang
+            </div>
+            <div class="card-body">
+                <form action="{{ route('barang.update', $item->id) }}" method="post">
+                    @csrf
+                    @method('PUT')
 
-    @endsection
+                    <div class="mb-3">
+                        <label for="nama_barang" class="form-label">Nama Barang</label>
+                        <input type="text" class="form-control" name="nama_barang" id="nama_barang"
+                            value="{{ old('nama_barang', $item->nama_barang) }}" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="kode_inventaris" class="form-label">Kode Inventaris</label>
+                        <input type="text" class="form-control" name="kode_inventaris" id="kode_inventaris"
+                            value="{{ old('kode_inventaris', $item->kode_inventaris) }}" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="kategori_id" class="form-label">Kategori ID</label>
+                        <input type="text" class="form-control" name="kategori_id" id="kategori_id"
+                            value="{{ old('kategori_id', $item->kategori_id) }}" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="ruangan_id" class="form-label">Ruangan ID</label>
+                        <input type="text" class="form-control" name="ruangan_id" id="ruangan_id"
+                            value="{{ old('ruangan_id', $item->ruangan_id) }}" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="tahun_pengadaan" class="form-label">Tahun Pengadaan</label>
+                        <input type="text" class="form-control" name="tahun_pengadaan" id="tahun_pengadaan"
+                            value="{{ old('tahun_pengadaan', $item->tahun_pengadaan) }}" required>
+                    </div>
+
+                    <div class="text-end">
+                        <button type="submit" class="btn btn-success">SIMPAN</button>
+                        <a href="{{ route('barang.index') }}" class="btn btn-danger">BATAL</a>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+@endsection
