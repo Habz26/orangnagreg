@@ -40,6 +40,18 @@
                             value="{{ old('tahun_pengadaan', $item->tahun_pengadaan) }}" required>
                     </div>
 
+                    <div class="mb-3">
+                        <label for="jumlah" class="form-label">Jumlah</label>
+                        <input type="text" class="form-control" name="jumlah" id="jumlah"
+                            value="{{ old('jumlah', $item->jumlah) }}" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="kondisi" class="form-label">Kondisi</label>
+                        <input type="text" class="form-control" name="kondisi" id="kondisi"
+                            value="{{ old('kondisi', $item->kondisi) }}" required>
+                    </div>
+
                     <div class="text-end">
                         <button type="submit" class="btn btn-success">SIMPAN</button>
                         <a href="{{ route('barang.index') }}" class="btn btn-danger">BATAL</a>

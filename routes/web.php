@@ -11,12 +11,12 @@ use App\Http\Controllers\TanahController;
 use App\Http\Controllers\RuanganController;
 use App\Http\Controllers\BangunanController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('auth.login');
 });
-
 
 Route::middleware('guest')->group(function () {
     Route::get('/login', function () {
@@ -29,12 +29,11 @@ Route::middleware('guest')->group(function () {
     Route::post('/register', [App\Http\Controllers\AuthController::class, 'register'])->name('register.post');
 });
 
-Route::middleware('auth')->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
-    Route::resource('user', UserCotroller::class)->names('user');
+    Route::middleware('auth')->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     
+    Route::resource('user', UserCotroller::class)->names('user');
+
     // Route yang bisa diakses admin dan user
     Route::middleware('role:admin,user')->group(function () {
         Route::resource('/tanah', TanahController::class)->names('tanah');
@@ -43,7 +42,7 @@ Route::middleware('auth')->group(function () {
         Route::resource('/kategori', KategoriController::class)->names('kategori');
         Route::resource('/barang', BarangController::class)->names('barang');
     });
-    
+
     // Route khusus untuk admin (manajemen pengguna)
     Route::middleware('role:admin')->group(function () {
         // Pastikan Anda sudah membuat UserController, misalnya dengan:

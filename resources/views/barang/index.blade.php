@@ -26,6 +26,7 @@
                             <th scope="col" class="text-center">Ruangan ID</th>
                             <th scope="col" class="text-center">Tahun Pengadaan</th>
                             <th scope="col" class="text-center">Sumber Dana</th>
+                            <th scope="col" class="text-center">Jumlah</th>
                             <th scope="col" class="text-center">Kondisi</th>
                             <th scope="col" class="text-center">Opsi</th>
                         </tr>
@@ -40,6 +41,7 @@
                                 <td>{{ $item->ruangan_id }}</td>
                                 <td>{{ $item->tahun_pengadaan }}</td>
                                 <td>{{ $item->sumber_dana }}</td>
+                                <td>{{ $item->jumlah }}</td>
                                 <td>{{ $item->kondisi }}</td>
                                 <td>
                                     <div class="d-flex justify-content-center gap-2">

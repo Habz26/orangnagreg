@@ -15,8 +15,7 @@ class BarangController extends Controller
         return view('barang.index', [
         'title' => 'Barang',
         'items' => Barang::all(),
-    ]);
-        
+    ]);    
     }
     public function create()
     {

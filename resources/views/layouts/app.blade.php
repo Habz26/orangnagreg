@@ -5,12 +5,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>App</title>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @vite(['resources/css/app.css', 'resources/css/custom.css', 'resources/js/app.js'])
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link rel="stylesheet" href="{{ asset('adminlte/dist/css/adminlte.min.css') }}">
     <link rel="stylesheet" href="{{ asset('adminlte/fontawesome/css/all.min.css') }}">
 
+
     <style>
+        .dropdown-menu {
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            transform-origin: top;
+            display: block;
+            /* tetap di DOM */
+            opacity: 0;
+            transform: translateY(-10px);
+            pointer-events: none;
+        }
+
+        .dropdown-menu.show {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+
+
         /* Preloader overlay */
         #preloader {
             position: fixed;
@@ -84,6 +103,18 @@
                 transform: scale(1);
             }
         }
+
+        .scroll-hidden::-webkit-scrollbar {
+            display: none;
+            /* Chrome, Safari, Edge */
+        }
+
+        .scroll-hidden {
+            -ms-overflow-style: none;
+            /* IE 10+ */
+            scrollbar-width: none;
+            /* Firefox */
+        }
     </style>
 </head>
 
@@ -110,6 +141,62 @@
             setTimeout(() => preloader.style.display = 'none', 500);
         });
     </script>
+    <script>
+        document.querySelectorAll('.dropdown').forEach(dropdown => {
+            const menu = dropdown.querySelector('.dropdown-menu');
+            dropdown.addEventListener('hide.bs.dropdown', e => {
+                e.preventDefault(); // hentikan Bootstrap remove show class
+                menu.classList.remove('show'); // mulai animasi close
+                setTimeout(() => {
+                    bootstrap.Dropdown.getInstance(dropdown.querySelector(
+                        '[data-bs-toggle="dropdown"]'))._completeHide();
+                }, 300); // sesuai durasi transition
+            });
+        });
+    </script>
+    <script>
+        document.getElementById('togglePassword').addEventListener('click', function() {
+            const input = document.getElementById('password');
+            const icon = this.querySelector('i');
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                input.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        });
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const container = document.getElementById("scrollContainer");
+            const speed = 1; // pixels per interval
+            const intervalTime = 20; // ms
+
+            let direction = 1; // 1 = scroll ke bawah, -1 = scroll ke atas
+
+            function autoScroll() {
+                container.scrollTop += speed * direction;
+
+                // cek batas bawah
+                if (container.scrollTop + container.clientHeight >= container.scrollHeight) {
+                    direction = -1; // balik scroll ke atas
+                }
+
+                // cek batas atas
+                if (container.scrollTop <= 0) {
+                    direction = 1; // scroll ke bawah lagi
+                }
+            }
+
+            setInterval(autoScroll, intervalTime);
+        });
+    </script>
+
+
 </body>
 
 </html>

@@ -48,6 +48,10 @@
                                 <input type="text" name="sumber_dana" class="form-control" id="sumber_dana">
                             </div>
                             <div class="mb-3">
+                                <label for="kondisi" class="form-label">Jumlah</label>
+                                <input type="text" name="jumlah" class="form-control" id="jumlah">
+                            </div>
+                            <div class="mb-3">
                                 <label for="kondisi" class="form-label">Kondisi</label>
                                 <input type="text" name="kondisi" class="form-control" id="kondisi">
                             </div>

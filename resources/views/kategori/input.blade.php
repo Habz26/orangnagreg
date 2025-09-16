@@ -3,7 +3,7 @@
     <div class="d-flex justify-content-center align-items-center" style="min-height: 80vh;">
         <div class="card" style="max-width: 500px; width: 100%;">
             <div class="card-header text-center">
-                Input Kategori
+                <strong>Input Kategori</strong>
             </div>
             <div class="card-body">
                 <form action="{{ route('kategori.store') }}" method="post">
