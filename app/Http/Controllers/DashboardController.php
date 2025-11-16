@@ -38,20 +38,16 @@ class DashboardController extends Controller
         if ($q) {
             $searchBarangs = Barang::where('nama_barang', 'like', "%$q%")->get();
             $searchRuangan = Ruangan::where('nama_ruangan', 'like', "%$q%")
-                                     ->orWhere('kode_ruangan', 'like', "%$q%")
-                                     ->get();
+                ->orWhere('kode_ruangan', 'like', "%$q%")
+                ->get();
             $searchBangunan = Bangunan::where('nama_bangunan', 'like', "%$q%")
-                                       ->orWhere('kode_bangunan', 'like', "%$q%")
-                                       ->get();
+                ->orWhere('kode_bangunan', 'like', "%$q%")
+                ->get();
             $searchTanah = Tanah::where('nama_tanah', 'like', "%$q%")
-                                 ->orWhere('luas', 'like', "%$q%")
-                                 ->get();
+                ->orWhere('luas', 'like', "%$q%")
+                ->get();
         }
 
-        return view('dashboard', compact(
-            'barangs', 'ruangan', 'bangunan', 'tanah',
-            'searchBarangs', 'searchRuangan', 'searchBangunan', 'searchTanah',
-            'totalInventaris', 'totalRuangan', 'totalBangunan', 'totalTanah', 'totalUser', 'q'
-        ));
+        return view('dashboard', compact('barangs', 'ruangan', 'bangunan', 'tanah', 'searchBarangs', 'searchRuangan', 'searchBangunan', 'searchTanah', 'totalInventaris', 'totalRuangan', 'totalBangunan', 'totalTanah', 'totalUser', 'q'));
     }
 }

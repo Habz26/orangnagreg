@@ -18,6 +18,15 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
+Route::get('/refresh-captcha', function () {
+    return response()->json(['captcha' => captcha_src()]);
+});
+
+Route::get('/welcome', function () {
+    return view('welcome');
+})->name('welcome');
+
+
 Route::middleware('guest')->group(function () {
     Route::get('/login', function () {
         return view('auth.login');
@@ -35,7 +44,7 @@ Route::middleware('guest')->group(function () {
     Route::resource('user', UserCotroller::class)->names('user');
 
     // Route yang bisa diakses admin dan user
-    Route::middleware('role:admin,user')->group(function () {
+    Route::middleware('role:1,0')->group(function () {
         Route::resource('/tanah', TanahController::class)->names('tanah');
         Route::resource('/bangunan', BangunanController::class)->names('bangunan');
         Route::resource('/ruangan', RuanganController::class)->names('ruangan');
@@ -44,7 +53,7 @@ Route::middleware('guest')->group(function () {
     });
 
     // Route khusus untuk admin (manajemen pengguna)
-    Route::middleware('role:admin')->group(function () {
+    Route::middleware('role:1')->group(function () {
         // Pastikan Anda sudah membuat UserController, misalnya dengan:
         // php artisan make:controller UserController --resource
         Route::resource('/user', UserCotroller::class)->names('user');

@@ -1,4 +1,4 @@
-<nav class="navbar navbar-dark bg-purple sticky-top py-3">
+<nav class="navbar navbar-dark bg-secondary sticky-top py-3">
     <div class="container-fluid">
         <a class="navbar-brand" href="{{ route('dashboard') }}"><b><i>S I M A S E T Sekolah Menengah Kejuruan الجموكية</i></b></a>
 

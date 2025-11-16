@@ -32,7 +32,7 @@
                                 <td class="text-center">{{ $loop->iteration }}</td>
                                 <td>{{ $item->nama }}</td>
                                 <td>{{ $item->email }}</td>
-                                <td>{{ $item->role }}</td>
+                                <td>{{ $item->role == 1 ? 'Admin' : 'User' }}</td>
                                 <td class="text-center">
                                     <div class="d-flex justify-content-center gap-2">
                                         <a class="btn btn-success btn-sm" href="{{ route('user.edit', $item->id) }}">Edit</a>

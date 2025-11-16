@@ -38,6 +38,29 @@
                     <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
                 </div>
 
+                {{-- Captcha --}}
+<div class="mb-3">
+    <img id="captchaImage" src="{{ captcha_src() }}" alt="captcha" class="mb-3">
+
+    <div class="form-floating form-floating-outline mb-3">
+        <input type="text"
+               class="form-control"
+               id="captcha"
+               name="captcha"
+               placeholder="Ketik captcha">
+        <label for="captcha">Captcha</label>
+    </div>
+
+    <button type="button" class="btn btn-sm btn-secondary" id="refresh-captcha">
+        Refresh
+    </button>
+
+    @error('captcha')
+        <div style="color:red">{{ $message }}</div>
+    @enderror
+</div>
+
+
                 <button type="submit" class="btn btn-primary">
                     Register
                 </button>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 
 class UserCotroller extends Controller
 {
@@ -47,11 +48,17 @@ class UserCotroller extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    
+
+    public function edit($id)
     {
-        return view('user.edit', [
-            'item' => User::findOrFail($id)
-        ]);
+        $item = User::findOrFail($id);
+
+        // Ambil data untuk dropdown dari tabel referensi
+        $roles1 = DB::table('referensi')->where('jenis', 1)->where('id', 1)->where('status', 1)->get(); // bisa juga ->pluck('deskripsi', 'id') kalau mau key=id
+        $roles0 = DB::table('referensi')->where('jenis', 1)->where('id', 0)->where('status', 1)->get(); // bisa juga ->pluck('deskripsi', 'id') kalau mau key=id
+
+        return view('user.edit', compact('item', 'roles1', 'roles0'));
     }
 
     /**

@@ -24,9 +24,31 @@
 
                     <div class="mb-3">
                         <label for="role" class="form-label">Role</label>
-                        <input type="text" class="form-control" name="role" id="role"
-                            value="{{ old('role', $item->role) }}" required>
+                        <select class="form-control" name="role" id="role" required>
+                            <option value="">-- Pilih Role --</option>
+
+                            {{-- Admin --}}
+                            @foreach ($roles1 as $role)
+                                <option value="{{ $role->id }}"
+                                    {{ old('role', $item->role) == $role->id ? 'selected' : '' }}>
+                                    {{ $role->deskripsi }}
+                                </option>
+                            @endforeach
+
+                            {{-- User --}}
+                            @foreach ($roles0 as $role)
+                                <option value="{{ $role->id }}"
+                                    {{ old('role', $item->role) == $role->id ? 'selected' : '' }}>
+                                    {{ $role->deskripsi }}
+                                </option>
+                            @endforeach
+
+                        </select>
+                        @error('role')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
                     </div>
+
 
                     <div class="text-end">
                         <button type="submit" class="btn btn-success">SIMPAN</button>

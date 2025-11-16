@@ -5,18 +5,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>App</title>
+
     @vite(['resources/css/app.css', 'resources/css/custom.css', 'resources/js/app.js'])
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link rel="stylesheet" href="{{ asset('adminlte/dist/css/adminlte.min.css') }}">
     <link rel="stylesheet" href="{{ asset('adminlte/fontawesome/css/all.min.css') }}">
 
-
     <style>
+        /* Dropdown animation */
         .dropdown-menu {
             transition: transform 0.3s ease, opacity 0.3s ease;
             transform-origin: top;
             display: block;
-            /* tetap di DOM */
             opacity: 0;
             transform: translateY(-10px);
             pointer-events: none;
@@ -27,8 +27,6 @@
             transform: translateY(0);
             pointer-events: auto;
         }
-
-
 
         /* Preloader overlay */
         #preloader {
@@ -41,13 +39,12 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            z-index: 9999;
             flex-direction: column;
+            z-index: 9999;
             color: #fff;
             font-family: 'Instrument Sans', sans-serif;
         }
 
-        /* Spinner */
         .spinner {
             width: 80px;
             height: 80px;
@@ -59,66 +56,40 @@
         }
 
         @keyframes spin {
-            0% {
-                transform: rotate(0deg);
-            }
-
-            100% {
-                transform: rotate(360deg);
-            }
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
-        /* Animated dots text */
         .loading-text {
             font-size: 1.5rem;
             letter-spacing: 2px;
         }
 
         .loading-text span {
-            display: inline-block;
             animation: bounce 1.2s infinite ease-in-out;
+            display: inline-block;
         }
 
-        .loading-text span:nth-child(1) {
-            animation-delay: 0s;
-        }
-
-        .loading-text span:nth-child(2) {
-            animation-delay: 0.2s;
-        }
-
-        .loading-text span:nth-child(3) {
-            animation-delay: 0.4s;
-        }
+        .loading-text span:nth-child(1) { animation-delay: 0s; }
+        .loading-text span:nth-child(2) { animation-delay: 0.2s; }
+        .loading-text span:nth-child(3) { animation-delay: 0.4s; }
+        .loading-text span:nth-child(4) { animation-delay: 0.6s; }
+        .loading-text span:nth-child(5) { animation-delay: 0.8s; }
+        .loading-text span:nth-child(6) { animation-delay: 1s; }
+        .loading-text span:nth-child(7) { animation-delay: 1.2s; }
 
         @keyframes bounce {
-
-            0%,
-            80%,
-            100% {
-                transform: scale(0);
-            }
-
-            40% {
-                transform: scale(1);
-            }
+            0%, 80%, 100% { transform: scale(0); }
+            40% { transform: scale(1); }
         }
 
-        .scroll-hidden::-webkit-scrollbar {
-            display: none;
-            /* Chrome, Safari, Edge */
-        }
-
-        .scroll-hidden {
-            -ms-overflow-style: none;
-            /* IE 10+ */
-            scrollbar-width: none;
-            /* Firefox */
-        }
+        .scroll-hidden::-webkit-scrollbar { display: none; }
+        .scroll-hidden { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
 
 <body>
+
     <!-- Preloader -->
     <div id="preloader">
         <div class="spinner"></div>
@@ -128,75 +99,88 @@
     </div>
 
     @include('layouts.nav')
+
     <div class="container">
         @yield('content')
     </div>
 
     <script>
-        // Hapus preloader ketika page sudah load
-        window.addEventListener('load', function() {
-            const preloader = document.getElementById('preloader');
-            preloader.style.transition = 'opacity 0.5s ease';
-            preloader.style.opacity = '0';
-            setTimeout(() => preloader.style.display = 'none', 500);
+        // ===== PRELOADER =====
+        window.addEventListener('load', function () {
+            const pre = document.getElementById('preloader');
+            if (!pre) return;
+
+            pre.style.transition = 'opacity 0.5s';
+            pre.style.opacity = '0';
+            setTimeout(() => pre.style.display = 'none', 500);
         });
-    </script>
-    <script>
-        document.querySelectorAll('.dropdown').forEach(dropdown => {
-            const menu = dropdown.querySelector('.dropdown-menu');
-            dropdown.addEventListener('hide.bs.dropdown', e => {
-                e.preventDefault(); // hentikan Bootstrap remove show class
-                menu.classList.remove('show'); // mulai animasi close
-                setTimeout(() => {
-                    bootstrap.Dropdown.getInstance(dropdown.querySelector(
-                        '[data-bs-toggle="dropdown"]'))._completeHide();
-                }, 300); // sesuai durasi transition
-            });
-        });
-    </script>
-    <script>
-        document.getElementById('togglePassword').addEventListener('click', function() {
-            const input = document.getElementById('password');
-            const icon = this.querySelector('i');
-            if (input.type === 'password') {
-                input.type = 'text';
-                icon.classList.remove('fa-eye');
-                icon.classList.add('fa-eye-slash');
-            } else {
-                input.type = 'password';
-                icon.classList.remove('fa-eye-slash');
-                icon.classList.add('fa-eye');
-            }
-        });
-    </script>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const container = document.getElementById("scrollContainer");
-            const speed = 1; // pixels per interval
-            const intervalTime = 20; // ms
+        // ===== DOM READY =====
+        document.addEventListener('DOMContentLoaded', function () {
 
-            let direction = 1; // 1 = scroll ke bawah, -1 = scroll ke atas
+            // ===== TOGGLE PASSWORD =====
+            const toggleBtn = document.getElementById('togglePassword');
+            const passwordInput = document.getElementById('password');
 
-            function autoScroll() {
-                container.scrollTop += speed * direction;
+            if (toggleBtn && passwordInput) {
+                toggleBtn.addEventListener('click', function () {
+                    const isHidden = passwordInput.type === 'password';
+                    passwordInput.type = isHidden ? 'text' : 'password';
 
-                // cek batas bawah
-                if (container.scrollTop + container.clientHeight >= container.scrollHeight) {
-                    direction = -1; // balik scroll ke atas
-                }
-
-                // cek batas atas
-                if (container.scrollTop <= 0) {
-                    direction = 1; // scroll ke bawah lagi
-                }
+                    const icon = this.querySelector('i');
+                    if (icon) {
+                        icon.classList.toggle('fa-eye');
+                        icon.classList.toggle('fa-eye-slash');
+                    }
+                });
             }
 
-            setInterval(autoScroll, intervalTime);
+            // ===== AUTO SCROLL (if available) =====
+            const container = document.getElementById('scrollContainer');
+            if (container) {
+                let direction = 1;
+                setInterval(() => {
+                    container.scrollTop += 1 * direction;
+                    if (container.scrollTop + container.clientHeight >= container.scrollHeight) direction = -1;
+                    if (container.scrollTop <= 0) direction = 1;
+                }, 20);
+            }
+
+            // ===== REFRESH CAPTCHA =====
+            const refreshBtn = document.getElementById('refresh-captcha');
+            const captchaImg = document.getElementById('captchaImage');
+            const captchaInput = document.getElementById('captcha');
+
+            if (refreshBtn && captchaImg) {
+                refreshBtn.addEventListener('click', async function () {
+                    try {
+                        refreshBtn.disabled = true;
+                        refreshBtn.textContent = 'Loading...';
+
+                        const res = await fetch('/refresh-captcha', {
+                            method: 'GET',
+                            headers: { 'Accept': 'application/json' }
+                        });
+
+                        if (!res.ok) throw new Error('Gagal fetch captcha baru');
+
+                        const data = await res.json();
+                        captchaImg.src = data.captcha + '?' + Date.now();
+
+                        if (captchaInput) captchaInput.value = '';
+
+                    } catch (e) {
+                        alert('Gagal me-refresh captcha!');
+                        console.error(e);
+                    } finally {
+                        refreshBtn.disabled = false;
+                        refreshBtn.textContent = 'Refresh';
+                    }
+                });
+            }
+
         });
     </script>
-
 
 </body>
-
 </html>

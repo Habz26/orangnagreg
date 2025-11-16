@@ -50,20 +50,7 @@
                     </div>
                 </div>
 
-                {{-- Total User --}}
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <div class="small-box bg-warning">
-                        <div class="inner">
-                            <h3>{{ number_format($totalUser, 0, ',', '.') }}</h3>
-                            <p>Total User</p>
-                        </div>
-                        <div class="icon"><i class="fas fa-users"></i></div>
-                        <a href="{{ route('user.index') }}" class="small-box-footer">
-                            More info <i class="fas fa-arrow-circle-right"></i>
-                        </a>
-                    </div>
-                </div>
-
+                
                 {{-- Total Bangunan --}}
                 <div class="col-lg-3 col-md-4 col-sm-6">
                     <div class="small-box bg-danger">
@@ -73,6 +60,19 @@
                         </div>
                         <div class="icon"><i class="fas fa-building"></i></div>
                         <a href="{{ route('bangunan.index') }}" class="small-box-footer">
+                            More info <i class="fas fa-arrow-circle-right"></i>
+                        </a>
+                    </div>
+                </div>
+                {{-- Total User --}}
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="small-box bg-warning">
+                        <div class="inner">
+                            <h3>{{ number_format($totalUser, 0, ',', '.') }}</h3>
+                            <p>Total User</p>
+                        </div>
+                        <div class="icon"><i class="fas fa-users"></i></div>
+                        <a href="{{ route('user.index') }}" class="small-box-footer">
                             More info <i class="fas fa-arrow-circle-right"></i>
                         </a>
                     </div>

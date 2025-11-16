@@ -9,28 +9,32 @@ use App\Models\User;
 class AuthController extends Controller
 {
     public function login(Request $request)
-    {
-        $credentials = $request->only('email', 'password');
+{
+    // Validasi input & captcha
+    $request->validate([
+        'email' => 'required|string|email',
+        'password' => 'required|string',
+        'captcha' => 'required|captcha',
+    ]);
 
-        if (auth()->attempt($credentials)) {
-            $request->session()->regenerate();
-            $user = auth()->user();
-            if ($user->role === 'admin') {
-                return redirect()->route('dashboard');
-            } elseif ($user->role === 'user') {
-                return redirect()->route('dashboard');
-            } else {
-                auth()->logout();
-                return redirect()
-                    ->back()
-                    ->withErrors(['role' => 'Role tidak dikenali.']);
-            }
+    // Ambil hanya email & password untuk auth
+    $credentials = $request->only('email', 'password');
+
+    if (auth()->attempt($credentials)) {
+        $request->session()->regenerate();
+        $user = auth()->user();
+
+        // Logika role baru
+        if ($user->role == 1) {
+            return redirect()->route('dashboard'); // admin
+        } else {
+            return redirect()->route('welcome'); // selain admin
         }
-
-        return redirect()
-            ->back()
-            ->withErrors(['email' => 'Email atau password salah.']);
     }
+
+    return redirect()->back()->withErrors(['email' => 'Email atau password salah.']);
+}
+
 
     public function logout(Request $request)
     {
@@ -43,7 +47,6 @@ class AuthController extends Controller
     public function register(Request $request)
     {
         $request->validate([
-
             'nama' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed:password_confirmation',
