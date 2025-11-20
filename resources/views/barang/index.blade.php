@@ -17,7 +17,7 @@
         <div class="card shadow-sm">
             <div class="card-body">
                 <table class="table table-hover align-middle">
-                    <thead class="table-light">
+                    <thead class="table-secondary">
                         <tr>
                             <th scope="col" class="text-center">No</th>
                             <th scope="col" class="text-center">Nama Barang</th>
@@ -35,15 +35,15 @@
                         @foreach ($items as $item)
                             <tr>
                                 <td class="text-center">{{ $loop->iteration }}</td>
-                                <td>{{ $item->nama_barang }}</td>
-                                <td>{{ $item->kode_inventaris }}</td>
-                                <td>{{ $item->kategori_id }}</td>
-                                <td>{{ $item->ruangan_id }}</td>
-                                <td>{{ $item->tahun_pengadaan }}</td>
-                                <td>{{ $item->sumber_dana }}</td>
-                                <td>{{ $item->jumlah }}</td>
-                                <td>{{ $item->kondisi }}</td>
-                                <td>
+                                <td class="text-center">{{ $item->nama_barang }}</td>
+                                <td class="text-center">{{ $item->kode_inventaris }}</td>
+                                <td class="text-center">{{ $item->kategori->nama_kategori }}</td>
+                                <td class="text-center">{{ $item->ruangan->nama_ruangan }}</td>
+                                <td class="text-center">{{ $item->tahun_pengadaan }}</td>
+                                <td class="text-center">{{ $item->sumber_dana }}</td>
+                                <td class="text-center">{{ $item->jumlah }}</td>
+                                <td class="text-center">{{ $item->kondisi }}</td>
+                                <td class="text-center">
                                     <div class="d-flex justify-content-center gap-2">
                                         <a class="btn btn-success btn-sm"
                                             href="{{ route('barang.edit', $item->id) }}">Edit</a>

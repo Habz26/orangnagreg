@@ -28,7 +28,7 @@ class AuthController extends Controller
         if ($user->role == 1) {
             return redirect()->route('dashboard'); // admin
         } else {
-            return redirect()->route('welcome'); // selain admin
+            return redirect()->route('dashboarduser'); // selain admin
         }
     }
 
@@ -41,7 +41,7 @@ class AuthController extends Controller
         auth()->logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect()->route('login');
+        return redirect()->route('dashboarduser');
     }
 
     public function register(Request $request)

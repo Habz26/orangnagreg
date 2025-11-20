@@ -20,7 +20,7 @@ class DashboardController extends Controller
         $totalInventaris = Barang::sum('jumlah');
         $totalRuangan = Ruangan::count();
         $totalBangunan = Bangunan::count();
-        $totalTanah = Tanah::sum('luas');
+        $totalTanah = Tanah::count();
         $totalUser = User::count();
 
         // Data Terkini (selalu tampil, tidak tergantung search)
@@ -28,6 +28,7 @@ class DashboardController extends Controller
         $ruangan = Ruangan::latest()->take(10)->get();
         $bangunan = Bangunan::latest()->take(10)->get();
         $tanah = Tanah::latest()->take(10)->get();
+        $tanahList = Tanah::with(['bangunan.ruangan.barangs'])->get();
 
         // Hasil pencarian (hanya jika ada query)
         $searchBarangs = collect();
@@ -48,6 +49,6 @@ class DashboardController extends Controller
                 ->get();
         }
 
-        return view('dashboard', compact('barangs', 'ruangan', 'bangunan', 'tanah', 'searchBarangs', 'searchRuangan', 'searchBangunan', 'searchTanah', 'totalInventaris', 'totalRuangan', 'totalBangunan', 'totalTanah', 'totalUser', 'q'));
+        return view('dashboard', compact('barangs', 'ruangan', 'bangunan', 'tanah', 'searchBarangs', 'searchRuangan', 'searchBangunan', 'searchTanah', 'totalInventaris', 'totalRuangan', 'totalBangunan', 'totalTanah', 'totalUser', 'q', 'tanahList'));
     }
 }

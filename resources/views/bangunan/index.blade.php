@@ -22,7 +22,7 @@
                             <th scope="col" class="text-center">No</th>
                             <th scope="col">Nama Bangunan</th>
                             <th scope="col">Kode Bangunan</th>
-                            <th scope="col">Tanah ID</th>
+                            <th scope="col">Tanah</th>
                             <th scope="col" class="text-center">Opsi</th>
                         </tr>
                     </thead>
@@ -32,7 +32,7 @@
                                 <td class="text-center">{{ $loop->iteration }}</td>
                                 <td>{{ $item->nama_bangunan }}</td>
                                 <td>{{ $item->kode_bangunan }}</td>
-                                <td>{{ $item->tanah_id }}</td>
+                                <td>{{ $item->tanah->nama_tanah ?? '-' }}</td>
                                 <td class="text-center">
                                     <div class="d-flex justify-content-center gap-2">
                                         <a class="btn btn-success btn-sm" href="{{ route('bangunan.edit', $item->id) }}">Edit</a>

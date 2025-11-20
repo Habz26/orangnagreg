@@ -40,8 +40,8 @@
                 <div class="col-lg-3 col-md-4 col-sm-6">
                     <div class="small-box bg-success">
                         <div class="inner">
-                            <h3>{{ number_format($totalTanah, 0, ',', '.') }}<span style="font-size:0.7em;">m²</span></h3>
-                            <p>Luas Tanah</p>
+                            <h3>{{ number_format($totalTanah, 0, ',', '.') }}<span style="font-size:0.7em;"></span></h3>
+                            <p>Total Tanah</p>
                         </div>
                         <div class="icon"><i class="fas fa-tree"></i></div>
                         <a href="{{ route('tanah.index') }}" class="small-box-footer">
@@ -50,7 +50,7 @@
                     </div>
                 </div>
 
-                
+
                 {{-- Total Bangunan --}}
                 <div class="col-lg-3 col-md-4 col-sm-6">
                     <div class="small-box bg-danger">
@@ -81,7 +81,7 @@
         </div>
 
         {{-- Hasil Pencarian --}}
-        <div class="row mt-4">
+        <div class="row mt-2">
             <div class="col-12">
                 <div class="card shadow-lg">
                     <div class="card-header bg-info text-white">
@@ -99,7 +99,8 @@
                                     <h6>Barang</h6>
                                     <ul>
                                         @foreach ($searchBarangs as $item)
-                                            <li>{{ $item->nama_barang }} | {{ $item->kode_inventaris }} | {{ $item->jumlah }}</li>
+                                            <li>{{ $item->nama_barang }} | {{ $item->kode_inventaris }} |
+                                                {{ $item->jumlah }}</li>
                                         @endforeach
                                     </ul>
                                 @endif
@@ -108,7 +109,8 @@
                                     <h6>Ruangan</h6>
                                     <ul>
                                         @foreach ($searchRuangan as $item)
-                                            <li>{{ $item->nama_ruangan }} | Kode Ruangan : {{ $item->kode_ruangan }} | Bangunan : {{ $item->bangunan_id }}</li>
+                                            <li>{{ $item->nama_ruangan }} | Kode Ruangan : {{ $item->kode_ruangan }} |
+                                                Bangunan : {{ $item->bangunan_id }}</li>
                                         @endforeach
                                     </ul>
                                 @endif
@@ -117,7 +119,8 @@
                                     <h6>Bangunan</h6>
                                     <ul>
                                         @foreach ($searchBangunan as $item)
-                                            <li>{{ $item->nama_bangunan }} | Kode Bangunan : {{ $item->kode_bangunan }} | Tanah : {{ $item->tanah_id }}</li>
+                                            <li>{{ $item->nama_bangunan }} | Kode Bangunan : {{ $item->kode_bangunan }} |
+                                                Tanah : {{ $item->tanah_id }}</li>
                                         @endforeach
                                     </ul>
                                 @endif
@@ -126,7 +129,8 @@
                                     <h6>Tanah</h6>
                                     <ul>
                                         @foreach ($searchTanah as $item)
-                                            <li>{{ $item->nama_tanah }} | Luas tanah :{{ $item->luas }} | No Sertifikat : {{ $item->no_sertifikat }}</li>
+                                            <li>{{ $item->nama_tanah }} | Luas tanah :{{ $item->luas }} | No Sertifikat
+                                                : {{ $item->no_sertifikat }}</li>
                                         @endforeach
                                     </ul>
                                 @endif
@@ -141,104 +145,44 @@
 
 
 
-        {{-- Card Data Terkini --}}
-        <div class="card mt-4 shadow-lg">
-            <div class="card-header">
-                <strong>Data Terkini</strong>
+        {{-- Rekap Data --}}
+        <hr class="bg-dark">
+        <div class="ms-auto mt-2">
+            <button class="btn btn-success" onclick="printRekap()">Cetak Rekap</button>
+        </div>
+        <div id="rekapCard" class="card mt-2 shadow-lg">
+            <div class="card-header bg-primary text-white d-flex align-items-center">
+                <strong>Rekap Data</strong>
             </div>
-            <div class="card-body p-0">
-                <div id="scrollContainer" class="table-responsive scroll-hidden"
-                    style="max-height: 400px; overflow-y: auto;">
-
-                    {{-- Barangs --}}
-                    <h6 class="px-3 pt-2">Barang</h6>
-                    <table class="table table-bordered table-hover">
-                        <thead class="table-dark">
-                            <tr>
-                                <th style="width: 60px">ID</th>
-                                <th>Nama Barang</th>
-                                <th>Jumlah</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($barangs as $item)
-                                <tr>
-                                    <td>{{ $item->id }}</td>
-                                    <td>{{ $item->nama_barang }}</td>
-                                    <td>{{ $item->jumlah }}</td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-
-
-                    {{-- Ruangan --}}
-                    <h6 class="px-3 pt-2">Ruangan</h6>
-                    <table class="table table-bordered table-hover mb-0">
-                        <thead class="table-dark">
-                            <tr>
-                                <th style="width: 60px;">ID</th>
-                                <th>Nama Ruangan</th>
-                                <th>Kode</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($ruangan as $item)
-                                <tr>
-                                    <td>{{ $item->id }}</td>
-                                    <td>{{ $item->nama_ruangan }}</td>
-                                    <td>{{ $item->kode_ruangan }}</td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-
-                    {{-- Bangunan --}}
-                    <h6 class="px-3 pt-2">Bangunan</h6>
-                    <table class="table table-bordered table-hover mb-0">
-                        <thead class="table-dark">
-                            <tr>
-                                <th style="width: 60px;">ID</th>
-                                <th>Nama Bangunan</th>
-                                <th>Kode</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($bangunan as $item)
-                                <tr>
-                                    <td>{{ $item->id }}</td>
-                                    <td>{{ $item->nama_bangunan }}</td>
-                                    <td>{{ $item->kode_bangunan }}</td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-
-                    {{-- Tanah --}}
-                    <h6 class="px-3 pt-2">Tanah</h6>
-                    <table class="table table-bordered table-hover mb-0">
-                        <thead class="table-dark">
-                            <tr>
-                                <th style="width: 60px;">ID</th>
-                                <th>Nama Tanah</th>
-                                <th>Luas</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($tanah as $item)
-                                <tr>
-                                    <td>{{ $item->id }}</td>
-                                    <td>{{ $item->nama_tanah }}</td>
-                                    <td>{{ $item->luas }}</td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-
-                </div>
+            <div class="card-body p-3 scroll-hidden" style="max-height: 500px; overflow-y: auto;">
+                @foreach ($tanahList as $tanah)
+                    <div class="mb-3 p-2 border rounded" style="background-color: #f8f9fa;">
+                        <h5 class="mb-2">Tanah: {{ $tanah->nama_tanah }} | Luas: {{ $tanah->luas }}</h5>
+                        @foreach ($tanah->bangunan as $bangunan)
+                            <div class="mb-2 p-2 border rounded" style="background-color: #e9ecef; margin-left: 20px;">
+                                <h6 class="mb-1">Bangunan: {{ $bangunan->nama_bangunan }} | Kode:
+                                    {{ $bangunan->kode_bangunan }}</h6>
+                                @foreach ($bangunan->ruangan as $ruangan)
+                                    <div class="mb-1 p-2 border rounded"
+                                        style="background-color: #dee2e6; margin-left: 20px;">
+                                        <h6 class="mb-1">Ruangan: {{ $ruangan->nama_ruangan }} | Kode:
+                                            {{ $ruangan->kode_ruangan }}</h6>
+                                        @if ($ruangan->barangs->count())
+                                            <ul class="mb-0 ps-3">
+                                                @foreach ($ruangan->barangs as $barang)
+                                                    <li>{{ $barang->nama_barang }} | Jumlah: {{ $barang->jumlah }}</li>
+                                                @endforeach
+                                            </ul>
+                                        @else
+                                            <p class="mb-0 ps-3 fst-italic">Tidak ada inventaris.</p>
+                                        @endif
+                                    </div>
+                                @endforeach
+                            </div>
+                        @endforeach
+                    </div>
+                @endforeach
             </div>
         </div>
-
-
     </div>
 @endsection
