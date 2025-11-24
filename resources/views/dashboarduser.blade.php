@@ -1,20 +1,126 @@
 @extends('layouts.app')
 
-@section('title', 'Dashboard')
+@section('title', 'Dashboard SIMASET')
 
 @section('content')
-<div class="col-md-12 col-lg-6 col-xl-4">
-    <div class="card mb-2">
-        <img class="card-img-top" src="{{ asset('img/Delta Force Screenshot 2025.10.31 - 15.04.29.27.png') }}" alt="Delta Force Screenshot">
-        <div class="card-img-overlay d-flex flex-column justify-content-center">
-            <h5 class="card-title text-white mt-5 pt-2">Card Title</h5>
-            <p class="card-text pb-2 pt-1 text-white">
-                Lorem ipsum dolor sit amet, <br>
-                consectetur adipisicing elit <br>
-                sed do eiusmod tempor.
-            </p>
-            <a href="#" class="text-white">Last update 15 hours ago</a>
+    <div class="container">
+
+        <h3 class="mt-3 mb-4">Dashboard SIMASET</h3>
+
+        <div class="row">
+
+            <!-- Tanah -->
+            <div class="col-md-3">
+                <div class="small-box bg-primary">
+                    <div class="inner">
+                        <h4>{{ $totalTanah }}</h4>
+                        <p>Total Tanah</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-map"></i>
+                    </div>
+                    <a href="{{ route('tanah.index') }}" class="small-box-footer">
+                        Lihat Detail <i class="fas fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Bangunan -->
+            <div class="col-md-3">
+                <div class="small-box bg-success">
+                    <div class="inner">
+                        <h4>{{ $totalBangunan }}</h4>
+                        <p>Total Bangunan</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <a href="{{ route('bangunan.index') }}" class="small-box-footer">
+                        Lihat Detail <i class="fas fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Ruangan -->
+            <div class="col-md-3">
+                <div class="small-box bg-warning">
+                    <div class="inner">
+                        <h4>{{ $totalRuangan }}</h4>
+                        <p>Total Ruangan</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-door-open"></i>
+                    </div>
+                    <a href="{{ route('ruangan.index') }}" class="small-box-footer">
+                        Lihat Detail <i class="fas fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Barang -->
+            <div class="col-md-3">
+                <div class="small-box bg-danger">
+                    <div class="inner">
+                        <h4>{{ $totalBarang }}</h4>
+                        <p>Total Barang</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-cubes"></i>
+                    </div>
+                    <a href="{{ route('barang.index') }}" class="small-box-footer">
+                        Lihat Detail <i class="fas fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
         </div>
+
+        <!-- Grafik -->
+        <div class="card mt-4">
+            <div class="card-header bg-info text-white">
+                Statistik Aset
+            </div>
+            <div class="card-body">
+                <canvas id="chartAset"></canvas>
+            </div>
+        </div>
+
     </div>
-</div>
 @endsection
+
+@push('scripts')
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const ctx = document.getElementById('chartAset').getContext('2d');
+
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Tanah', 'Bangunan', 'Ruangan', 'Barang'],
+            datasets: [{
+                label: 'Jumlah Aset',
+                backgroundColor: ['#007bff', '#28a745', '#ffc107', '#dc3545'],
+                data: [
+                    {{ $totalTanah ?? 0 }},
+                    {{ $totalBangunan ?? 0 }},
+                    {{ $totalRuangan ?? 0 }},
+                    {{ $totalBarang ?? 0 }}
+                ]
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { display: true }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+});
+</script>
+@endpush
+
+

@@ -8,6 +8,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link rel="stylesheet" href="{{ asset('adminlte/dist/css/adminlte.min.css') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.1/dist/css/adminlte.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <style>
         /* Body tetap bisa scroll tapi scrollbar tersembunyi */
         body {
@@ -47,25 +48,12 @@
 </head>
 
 <body>
-    <!-- Preloader -->
-    <div id="preloader">...</div>
+    @stack('scripts')
 
     <!-- Navbar -->
-    @auth
-        @if (auth()->user()->role == '1')
-            @include('layouts.nav')
-        @else
-            @include('layouts.navuser')
-        @endif
-    @endauth
-
-    @guest
-        @if (!Request::routeIs('login'))
-            @include('layouts.navuser')
-        @endif
-    @endguest
-
-
+    @if (!Request::routeIs('login'))
+    @include('layouts.nav')
+@endif
 
     <div class="container mt-3">
         @yield('content')
@@ -98,6 +86,7 @@
             myWindow.close();
         }
     </script>
+    
 </body>
 
 </html>

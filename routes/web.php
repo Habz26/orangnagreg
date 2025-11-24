@@ -12,11 +12,11 @@ use App\Http\Controllers\RuanganController;
 use App\Http\Controllers\BangunanController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DashboardUserController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('dashboarduser');
-})->name('dashboarduser');
+Route::get('/', [DashboardUserController::class, 'index'])->name('dashboarduser');
+
 
 Route::get('/refresh-captcha', function () {
     return response()->json(['captcha' => captcha_src()]);
@@ -25,7 +25,6 @@ Route::get('/refresh-captcha', function () {
 Route::get('/welcome', function () {
     return view('welcome');
 })->name('welcome');
-
 
 Route::middleware('guest')->group(function () {
     Route::get('/login', function () {
@@ -38,26 +37,26 @@ Route::middleware('guest')->group(function () {
     Route::post('/register', [App\Http\Controllers\AuthController::class, 'register'])->name('register.post');
 });
 
-    Route::middleware('auth')->group(function () {
+Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    
+
     Route::resource('user', UserCotroller::class)->names('user');
 
     // Route yang bisa diakses admin dan user
-    Route::middleware('role:1,0')->group(function () {
+    Route::middleware('role:1')->group(function () {
         Route::resource('/tanah', TanahController::class)->names('tanah');
         Route::resource('/bangunan', BangunanController::class)->names('bangunan');
         Route::resource('/ruangan', RuanganController::class)->names('ruangan');
         Route::resource('/kategori', KategoriController::class)->names('kategori');
         Route::resource('/barang', BarangController::class)->names('barang');
-    });
-
-    // Route khusus untuk admin (manajemen pengguna)
-    Route::middleware('role:1')->group(function () {
-        // Pastikan Anda sudah membuat UserController, misalnya dengan:
-        // php artisan make:controller UserController --resource
         Route::resource('/user', UserCotroller::class)->names('user');
     });
 });
+
+Route::get('/tanah', [TanahController::class, 'index'])->name('tanah.index');
+Route::get('/bangunan', [BangunanController::class, 'index'])->name('bangunan.index');
+Route::get('/ruangan', [RuanganController::class, 'index'])->name('ruangan.index');
+Route::get('/kategori', [KategoriController::class, 'index'])->name('kategori.index');
+Route::get('/barang', [BarangController::class, 'index'])->name('barang.index');
 
 Route::post('/logout', [App\Http\Controllers\AuthController::class, 'logout'])->name('logout');

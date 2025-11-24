@@ -1,76 +1,90 @@
-<nav class="navbar navbar-dark bg-secondary sticky-top py-3">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="{{ route('dashboard') }}">
-            <b><i>S I M A S E T Sekolah Menengah Kejuruan الجموكية</i></b>
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+    <div class="container">
+
+        <a class="navbar-brand" href="{{ route('dashboarduser') }}">
+            <i class="fas fa-boxes"></i> SIMASET
         </a>
 
-        {{-- Hamburger menu --}}
-        @if (!request()->routeIs('login'))
-        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
-            aria-controls="offcanvasNavbar">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
             <span class="navbar-toggler-icon"></span>
         </button>
-        @endif
 
-        {{-- Offcanvas --}}
-        <div class="offcanvas offcanvas-end bg-gray" tabindex="-1" id="offcanvasNavbar"
-            aria-labelledby="offcanvasNavbarLabel">
-            <div class="offcanvas-header">
-                <h5 class="offcanvas-title" id="offcanvasNavbarLabel"><i>S I M A S E T</i></h5>
-                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
-                    aria-label="Close"></button>
-            </div>
-            <div class="offcanvas-body">
-                <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-                    @auth
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+            <ul class="navbar-nav ms-auto">
+
                     <li class="nav-item">
-                        <a class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}"
-                            href="{{ route('dashboard') }}">Beranda</a>
+                        <a class="nav-link {{ request()->routeIs('tanah.index') ? 'active' : '' }}"
+                           href="{{ route('tanah.index') }}">
+                            <i class="fas fa-map"></i> Tanah
+                        </a>
                     </li>
 
-                    {{-- Dropdown offcanvas normal Bootstrap --}}
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle {{ request()->routeIs('tanah.index','bangunan.index','ruangan.index','barang.index','kategori.index') ? 'active':'' }}"
-                            href="#" id="offcanvasDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Lihat Data
+                    <li class="nav-item">
+                        <a class="nav-link {{ request()->routeIs('bangunan.index') ? 'active' : '' }}"
+                           href="{{ route('bangunan.index') }}">
+                            <i class="fas fa-building"></i> Bangunan
                         </a>
-                        <ul class="dropdown-menu w-100" aria-labelledby="offcanvasDropdown">
-                            @if(auth()->user()->role == '1')
-                            <li><a class="dropdown-item {{ request()->routeIs('user.index') ? 'active':'' }}"
-                                    href="{{ route('user.index') }}">User</a></li>
-                            @endif
-                            <li><a class="dropdown-item {{ request()->routeIs('tanah.index') ? 'active':'' }}"
-                                    href="{{ route('tanah.index') }}">Tanah</a></li>
-                            <li><a class="dropdown-item {{ request()->routeIs('bangunan.index') ? 'active':'' }}"
-                                    href="{{ route('bangunan.index') }}">Bangunan</a></li>
-                            <li><a class="dropdown-item {{ request()->routeIs('ruangan.index') ? 'active':'' }}"
-                                    href="{{ route('ruangan.index') }}">Ruangan</a></li>
-                            <li><a class="dropdown-item {{ request()->routeIs('barang.index') ? 'active':'' }}"
-                                    href="{{ route('barang.index') }}">Barang</a></li>
-                            <li><a class="dropdown-item {{ request()->routeIs('kategori.index') ? 'active':'' }}"
-                                    href="{{ route('kategori.index') }}">Kategori</a></li>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link {{ request()->routeIs('ruangan.index') ? 'active' : '' }}"
+                           href="{{ route('ruangan.index') }}">
+                            <i class="fas fa-door-open"></i> Ruangan
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link {{ request()->routeIs('barang.index') ? 'active' : '' }}"
+                           href="{{ route('barang.index') }}">
+                            <i class="fas fa-cubes"></i> Barang
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link {{ request()->routeIs('kategori.index') ? 'active' : '' }}"
+                           href="{{ route('kategori.index') }}">
+                            <i class="fas fa-tags"></i> Kategori
+                        </a>
+                    </li>
+                @auth
+                    <li class="nav-item">
+                        <a class="nav-link {{ request()->routeIs('user.index') ? 'active' : '' }}"
+                           href="{{ route('user.index') }}">
+                            <i class="fas fa-user"></i> User
+                        </a>
+                    </li>
+
+                    {{-- User / Logout --}}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="userDropdown" role="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-user-circle"></i> {{ Auth::user()->name }}
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li>
+                                <form action="{{ route('logout') }}" method="POST">
+                                    @csrf
+                                    <button class="dropdown-item">
+                                        <i class="fas fa-sign-out-alt"></i> Logout
+                                    </button>
+                                </form>
+                            </li>
                         </ul>
                     </li>
-                    @endauth
-                </ul>
-
-                {{-- Search --}}
-                <form class="d-flex mt-3" role="search" action="{{ route('dashboard') }}" method="GET">
-                    <input class="form-control me-2" type="search" name="q" value="{{ request('q') }}"
-                        placeholder="Cari data" aria-label="Search">
-                    <button class="btn btn-success" type="submit">Cari</button>
-                </form>
-
-                {{-- Logout --}}
-                @auth
-                <div class="mt-3">
-                    <form action="{{ route('logout') }}" method="POST" class="d-grid gap-2">
-                        @csrf
-                        <button class="btn btn-danger" type="submit">Logout</button>
-                    </form>
-                </div>
                 @endauth
-            </div>
+
+
+                {{-- Jika user belum login --}}
+                @guest
+                    <li class="nav-item">
+                        <a class="btn btn-primary" href="{{ route('login') }}">
+                            <i class="fas fa-sign-in-alt"></i> Login
+                        </a>
+                    </li>
+                @endguest
+
+            </ul>
+
         </div>
     </div>
 </nav>

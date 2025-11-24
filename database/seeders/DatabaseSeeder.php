@@ -17,12 +17,12 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        DB::table('referensi')->insert([
+        DB::table('user')->insert([
             [
-                'jenis' => '1',
-                'id' => '0',
-                'deskripsi' => 'User',
-                'status' => '1',
+                'nama' => '1',
+                'email' => '0',
+                'password' => 'User',
+                'role' => '1',
             ]
             ]);
     }
