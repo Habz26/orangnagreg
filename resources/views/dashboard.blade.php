@@ -84,12 +84,29 @@
         <div class="row mt-2">
             <div class="col-12">
                 <div class="card shadow-lg">
-                    <div class="card-header bg-info text-white">
-                        <strong>Hasil Pencarian</strong>
-                        @if (request('q'))
-                            : "{{ request('q') }}"
-                        @endif
+                    {{-- Card Header --}}
+                    <div class="card-header bg-info text-white d-flex justify-content-between align-items-center">
+                        <div>
+                            <strong>Hasil Pencarian</strong>
+                            @if (request('q'))
+                                : "{{ request('q') }}"
+                            @endif
+                        </div>
+
+                        {{-- Form Pencarian di kanan --}}
+                        <form action="{{ route('dashboard') }}" method="GET" class="d-flex"
+                            style="gap: 5px; max-width: 300px; width: 100%;">
+                            <input type="text" name="q" class="form-control form-control-sm"
+                                placeholder="Cari data..." value="{{ request('q') }}"
+                                style="border-radius: 4px 0 0 4px; border-right: none;">
+                            <button class="btn btn-light btn-sm" type="submit"
+                                style="border-radius: 0 4px 4px 0; border-left: none;">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </form>
                     </div>
+
+                    {{-- Card Body (tetap sama) --}}
                     <div class="card-body p-2">
                         @if (request('q'))
                             @if ($searchBarangs->isEmpty() && $searchRuangan->isEmpty() && $searchBangunan->isEmpty() && $searchTanah->isEmpty())
@@ -142,6 +159,7 @@
                 </div>
             </div>
         </div>
+
         {{-- Rekap Data --}}
         <hr class="bg-dark">
         <div class="ms-auto mt-2">

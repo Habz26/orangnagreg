@@ -3,6 +3,7 @@
     <div class="container py-4">
         <div class="d-flex justify-content-between align-items-center mb-3">
             <h3 class="mb-0">Daftar Ruangan</h3>
+            @auth
             <a class="btn btn-info text-white" href="{{ route('ruangan.create') }}">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                     class="bi bi-plus-square me-1" viewBox="0 0 16 16">
@@ -13,6 +14,7 @@
                 </svg>
                 Tambah Data
             </a>
+            @endauth
         </div>
 
         <div class="card shadow-sm">

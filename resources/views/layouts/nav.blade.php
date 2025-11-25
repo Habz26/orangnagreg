@@ -1,9 +1,16 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
     <div class="container">
 
-        <a class="navbar-brand" href="{{ route('dashboarduser') }}">
-            <i class="fas fa-boxes"></i> SIMASET
-        </a>
+        <a class="navbar-brand"
+   href="{{ 
+        auth()->check() 
+            ? (auth()->user()->role == 1 ? route('dashboard') : route('dashboarduser')) 
+            : route('dashboarduser')
+    }}">
+    <i class="fas fa-boxes"></i> SIMASET
+</a>
+
+
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
             <span class="navbar-toggler-icon"></span>
@@ -50,11 +57,10 @@
                 @auth
                     <li class="nav-item">
                         <a class="nav-link {{ request()->routeIs('user.index') ? 'active' : '' }}"
-                           href="{{ route('user.index') }}">
+                            href="{{ route('user.index') }}">
                             <i class="fas fa-user"></i> User
                         </a>
                     </li>
-
                     {{-- User / Logout --}}
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" id="userDropdown" role="button" data-bs-toggle="dropdown">

@@ -28,7 +28,6 @@
                                     @endforeach
                                 </select>
                             </div>
-
                             <div class="mb-3">
                                 <label for="ruangan_id" class="form-label">Ruangan</label>
                                 <select name="ruangan_id" id="ruangan_id" class="form-select" required>
