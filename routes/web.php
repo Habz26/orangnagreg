@@ -55,7 +55,7 @@ Route::middleware('auth')->group(function () {
 
 Route::get('/tanah', [TanahController::class, 'index'])->name('tanah.index');
 Route::get('/bangunan', [BangunanController::class, 'index'])->name('bangunan.index');
-Route::get('/ruangan', [RuanganController::class, 'index'])->name('ruangan.index');
+Route::get('/ruangan', [RuangaKwnController::class, 'index'])->name('ruangan.index');
 Route::get('/kategori', [KategoriController::class, 'index'])->name('kategori.index');
 Route::get('/barang', [BarangController::class, 'index'])->name('barang.index');
 
