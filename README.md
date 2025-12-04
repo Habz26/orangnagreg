@@ -65,7 +65,7 @@ SIMASET adalah **Sistem Informasi Aset** berbasis web yang digunakan untuk menge
 ---
 
 ## Cara Menjalankan
-```bash
+
 # Clone repository
 git clone https://github.com/username/simaset.git
 
