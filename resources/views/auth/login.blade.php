@@ -1,64 +1,74 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="d-flex justify-content-center align-items-center" style="height: 80vh;">
-    <div class="container" style="max-width: 500px;">
-        <h2>Login</h2>
+    <div class="d-flex justify-content-center align-items-center" style="height: 80vh;">
+        <div class="container" style="max-width: 400px;">
 
-        <form method="POST" action="{{ route('login') }}">
-            @csrf
+            {{-- FORM LOGIN UIVERSE --}}
+            <form class="form" method="POST" action="{{ route('login') }}">
+                @csrf
 
-            {{-- Email --}}
-            <div class="form-floating mb-3">
-                <input id="email" type="email" 
-                       class="form-control @error('email') is-invalid @enderror"
-                       name="email" value="{{ old('email') }}" required autofocus
-                       placeholder="Email address">
-                <label for="email">Email address</label>
-                @error('email')
-                    <span class="invalid-feedback">{{ $message }}</span>
-                @enderror
-            </div>
+                <p id="heading">Login</p>
 
-            {{-- Password --}}
-            <div class="form-floating mb-3 position-relative">
-                <input id="password" type="password" 
-                       class="form-control @error('password') is-invalid @enderror"
-                       name="password" required
-                       placeholder="Password">
-                <label for="password">Password</label>
-                <button type="button" class="btn btn-outline-secondary position-absolute top-50 end-0 translate-middle-y me-2" id="togglePassword">
-                    <i class="fas fa-eye"></i>
-                </button>
-                @error('password')
-                    <span class="invalid-feedback">{{ $message }}</span>
-                @enderror
-            </div>
-
-            {{-- Captcha --}}
-            <div class="mb-3">
-                <img id="captchaImage" src="{{ captcha_src() }}" alt="captcha" class="mb-3">
-                <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="captcha" name="captcha"
-                           placeholder="Ketik captcha">
-                    <label for="captcha">Captcha</label>
+                {{-- Email --}}
+                <div class="field">
+                    <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                        fill="currentColor" viewBox="0 0 16 16">
+                        <path
+                            d="M13.106 7.222c0-2.967-2.249-5.032-5.482-5.032-3.35 0-5.646 2.318-5.646 5.702 0 3.493 2.235 5.708 5.762 5.708.862 0 1.689-.123 2.304-.335v-.862c-.43.199-1.354.328-2.29.328-2.926 0-4.813-1.88-4.813-4.798 0-2.844 1.921-4.881 4.594-4.881 2.735 0 4.608 1.688 4.608 4.156 0 1.682-.554 2.769-1.416 2.769-.492 0-.772-.28-.772-.76V5.206H8.923v.834h-.11c-.266-.595-.881-.964-1.6-.964-1.4 0-2.378 1.162-2.378 2.823 0 1.737.957 2.906 2.379 2.906.8 0 1.415-.39 1.709-1.087h.11c.081.67.703 1.148 1.503 1.148 1.572 0 2.57-1.415 2.57-3.643zm-7.177.704c0-1.197.54-1.907 1.456-1.907.93 0 1.524.738 1.524 1.907S8.308 9.84 7.371 9.84c-.895 0-1.442-.725-1.442-1.914z">
+                        </path>
+                    </svg>
+                    <input autocomplete="off" placeholder="Email" class="input-field" type="email" name="email"
+                        value="{{ old('email') }}" required>
                 </div>
-                <button type="button" class="btn btn-sm btn-secondary" id="refresh-captcha">
-                    Refresh
-                </button>
+                @error('email')
+                    <div style="color:red; margin-top:-10px; margin-bottom:10px;">{{ $message }}</div>
+                @enderror
+
+                {{-- Password --}}
+                <div class="field">
+                    <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                        fill="currentColor" viewBox="0 0 16 16">
+                        <path
+                            d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z">
+                        </path>
+                    </svg>
+                    <input placeholder="Password" class="input-field" type="password" name="password" required>
+                </div>
+                @error('password')
+                    <div style="color:red; margin-top:-10px; margin-bottom:10px;">{{ $message }}</div>
+                @enderror
+
+                {{-- Captcha --}}
+                <div class="my-3 text-center">
+                    <img id="captchaImage" src="{{ captcha_src() }}" alt="captcha" class="mb-2"
+                        style="border-radius:8px; max-width: 100%; height: auto;">
+                    <div class="field mt-2">
+                        <input type="text" class="input-field" name="captcha" placeholder="Masukkan captcha" required>
+                    </div>
+                    <button type="button" class="btn btn-sm btn-secondary mt-2" id="refresh-captcha">
+                        Refresh
+                    </button>
+                </div>
                 @error('captcha')
                     <div style="color:red">{{ $message }}</div>
                 @enderror
-            </div>
 
-            {{-- Remember me --}}
-            <div class="form-check mb-3">
-                <input type="checkbox" class="form-check-input" id="remember" name="remember">
-                <label class="form-check-label" for="remember">Remember Me</label>
-            </div>
+                {{-- Submit button --}}
+                <div class="btn mt-3">
+                    <button class="button1" type="submit">
+                        &nbsp;&nbsp;&nbsp;&nbsp;Login&nbsp;&nbsp;&nbsp;&nbsp;
+                    </button>
+                </div>
 
-            <button type="submit" class="btn btn-primary w-100">Login</button>
-        </form>
+            </form>
+        </div>
     </div>
-</div>
+
+    {{-- Refresh Captcha --}}
+    <script>
+        document.getElementById('refresh-captcha').onclick = function() {
+            document.getElementById('captchaImage').src = "{{ captcha_src() }}" + "?" + Date.now();
+        };
+    </script>
 @endsection

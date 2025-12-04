@@ -69,8 +69,19 @@ return new class extends Migration
         $table->timestamps();
     });
 
+    Schema::create('referensi', function (Blueprint $table) {
+            $table->id('tabel_id'); // primary key auto increment
+            $table->tinyInteger('jenis')->nullable(false); // tinyint not null
+            $table->unsignedBigInteger('id')->unique(); // ini jadi FK ke users->id
+            $table->string('deskripsi', 255)->nullable(false);
+            $table->tinyInteger('status')->default(0)->nullable(false); // default 0
 
-    }
+            $table->timestamps();
+
+            // foreign key ke tabel users, kolom role (bisa di sesuaikan)
+            $table->foreign('id')->references('role')->on('users')->onDelete('cascade');
+        });
+}
 
     /**
      * Reverse the migrations.
@@ -84,6 +95,7 @@ return new class extends Migration
     Schema::dropIfExists('bangunan');
     Schema::dropIfExists('tanah');
     Schema::dropIfExists('kategori');
+
 
     Schema::enableForeignKeyConstraints();
 }
