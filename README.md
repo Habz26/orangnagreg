@@ -82,7 +82,7 @@ npm run dev
 # Jalankan migration & seeder
 php artisan migrate --seed
 
-pada tabel 'referensi' isi dengan data tsb: 
+pada tabel 'referensi' isi dengan data tsb: <br>
 <img width="523" height="69" alt="image" src="https://github.com/user-attachments/assets/c6ec1955-078e-4189-ad86-7ac5bfb47a25" />
 
 
