@@ -66,7 +66,7 @@ SIMASET adalah **Sistem Informasi Aset** berbasis web yang digunakan untuk menge
 ## Cara Menjalankan
 
 # Clone repository
-git clone [https://github.com/username/simaset.git](https://github.com/Habz26/orangnagreg)
+git clone [https://github.com/Klik/Disini.git](https://github.com/Habz26/orangnagreg)
 
 # Masuk ke direktori project
 cd simaset
