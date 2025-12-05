@@ -49,8 +49,7 @@ SIMASET adalah **Sistem Informasi Aset** berbasis web yang digunakan untuk menge
 ### 6. Hak Akses dan Kontrol
 | Role      | Akses Navigasi                                    | Fitur Tambahan                                          |
 |-----------|---------------------------------------------------|---------------------------------------------------------|
-| Guest     | Dashboard, Search engine                          | -                                                       |
-| User      | Tanah, Barang, Ruangan, Kategori, Bangunan        | Dashboard cards & bar chart, Search engine              |
+| Guest     | Tanah, Barang, Ruangan, Kategori, Bangunan        | Dashboard cards & bar chart, Search engine              |
 | Admin     | Tanah, Barang, Ruangan, Kategori, Bangunan, User  | Cetak rekap, Dashboard cards & bar chart, Search engine |
 
 ---
@@ -67,7 +66,7 @@ SIMASET adalah **Sistem Informasi Aset** berbasis web yang digunakan untuk menge
 ## Cara Menjalankan
 
 # Clone repository
-git clone https://github.com/username/simaset.git
+git clone [https://github.com/username/simaset.git](https://github.com/Habz26/orangnagreg)
 
 # Masuk ke direktori project
 cd simaset
